@@ -93,6 +93,15 @@
 
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, test) {
+    var result = [];
+
+    _.each(collection, function(item, index) {
+      if (test(item)) {
+        result.push(item);
+      }
+    })
+
+    return result;
   };
 
   // Return all elements of an array that don't pass a truth test.
@@ -153,6 +162,21 @@
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
   };
+
+
+
+
+
+
+  // DONE!
+
+
+
+
+
+
+
+
 
   // Determine if the array or object contains a given value (using `===`).
   _.contains = function(collection, target) {
