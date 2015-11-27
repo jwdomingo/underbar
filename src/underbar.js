@@ -115,6 +115,18 @@
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
+    // Create an empty list
+    var list = [];
+
+    // Populate the list upon iterating over each item in the array argument
+    // If item is already in list, filter out the item
+    return _.filter(array, function(item) {
+      if !(item in list) {
+        list.push(item);
+      }
+      //return item in list ? false : true;
+      //return !(item in list);
+    });
   };
 
 
