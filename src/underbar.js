@@ -40,19 +40,19 @@
   _.last = function(array, n) {
     var len = array.length;
 
-    // If n is undefined return the index equal to one less than the length of the array
-    // Else, slice the array starting from the index at (length - n) to the end of the array
-    // If the specified index is greater than the length, slice from 0 to length
+      // If n is undefined return the index equal to one less than the length of the array
+      // Else, slice the array starting from the index at (length - n) to the end of the array
+      // If the specified index is greater than the length, slice from 0 to length
     return n === undefined ? array[len - 1] : array.slice(len - (n > len ? len : n), len);
 
-    // VERBOSE SOLUTION //
-    /* if (n === undefined) {
-      return array[array.length - 1];
-    } else if (n > array.length) {
-      return array;
-    } else {
-      return array.slice(array.length - n, array.length);
-    } */
+      // VERBOSE SOLUTION //
+      /* if (n === undefined) {
+        return array[array.length - 1];
+      } else if (n > array.length) {
+        return array;
+      } else {
+        return array.slice(array.length - n, array.length);
+      } */
   };
 
   // Call iterator(value, key, collection) for each element of collection.
@@ -61,7 +61,17 @@
   // Note: _.each does not have a return value, but rather simply runs the
   // iterator function over each item in the input collection.
   _.each = function(collection, iterator) {
-
+    // If collection is array, invoke callback on each index
+    if (Array.isArray(collection)) {
+      for (var i = 0; i < collection.length; i++) {
+        iterator(collection[i], i ,collection);
+      }
+    // ElseIf collection is object, invoke callback on each item
+    } else {
+      for (var item in collection) {
+        iterator(collection[item],item, collection);
+      }
+    }
   };
 
   // Returns the index at which value can be found in the array, or -1 if value
