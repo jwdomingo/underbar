@@ -116,17 +116,17 @@
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
     // Create an empty list
-    var list = [];
+    var result = [];
 
     // Populate the list upon iterating over each item in the array argument
     // If item is already in list, filter out the item
-    return _.filter(array, function(item) {
-      if !(item in list) {
-        list.push(item);
+    _.each(array, function(item, index, collection) {
+      if (_.indexOf(result, item) < 0) {
+        result.push(item);
       }
-      //return item in list ? false : true;
-      //return !(item in list);
     });
+
+    return result;
   };
 
 
@@ -135,7 +135,6 @@
     // map() is a useful primitive iteration function that works a lot
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
-  };
 
   /*
    * TIP: map is really handy when you want to transform an array of
