@@ -136,6 +136,15 @@
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
 
+    var result = [];
+
+    _.each(collection, function(item, index, collection) {
+      result.push(iterator(item, index, collection));
+    });
+
+    return result;
+  };
+
   /*
    * TIP: map is really handy when you want to transform an array of
    * values into a new array of values. _.pluck() is solved for you
