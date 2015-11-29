@@ -3,6 +3,10 @@
 
   window._ = {};
 
+    //////////////////////////////
+   //          PART I          //
+  //////////////////////////////
+
   // Returns whatever value is passed as the argument. This function doesn't
   // seem very useful, but remember it--if a function needs to provide an
   // iterator when the user does not pass one in, this will be handy.
@@ -191,24 +195,13 @@
         result = iterator(result, item);
       }
     });
-    
+
     return result;
   };
 
-
-
-
-
-
-  // DONE!
-
-
-
-
-
-
-
-
+    ///////////////////////////////
+   //          PART II          //
+  ///////////////////////////////
 
   // Determine if the array or object contains a given value (using `===`).
   _.contains = function(collection, target) {
@@ -218,6 +211,7 @@
       if (wasFound) {
         return true;
       }
+
       return item === target;
     }, false);
   };
@@ -226,6 +220,23 @@
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
+
+    // Check if iterator is undefined and provide fallback
+    if (typeof iterator === 'undefined') {
+      iterator = _.identity;
+    }
+
+    // Use _.reduce to check if all items in collection iterate as true
+    return _.reduce(collection, function(allTrue, item) {
+      // Once an iterated item evaluates to false, _.reduce will always return false
+      if (!allTrue) {
+        return false;
+      }
+
+      // As long as items iterate as true, _.reduce keeps traversing the collection
+      // Double bang forces iterator to convert result to boolean
+      return !!iterator(item);
+    }, true);
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
@@ -327,11 +338,11 @@
   _.shuffle = function(array) {
   };
 
+    ////////////////////////////////
+   //          ADVANCED          //
+  ////////////////////////////////
 
   /**
-   * ADVANCED
-   * =================
-   *
    * Note: This is the end of the pre-course curriculum. Feel free to continue,
    * but nothing beyond here is required.
    */
