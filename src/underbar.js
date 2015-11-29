@@ -243,6 +243,21 @@
   // provided, provide a default one
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
+
+    // Non-clever Solution
+
+    // Check if iterator is undefined and provide fallback
+    if (typeof iterator === 'undefined') {
+      iterator = _.identity;
+    }
+
+    // Use map _.map to create array of truthy/falsy items
+    var list = _.map(collection, function(item, index, collection) {
+      return !!iterator(item);
+    });
+
+    // Search list for truthy value
+    return _.indexOf(list, true) > -1;
   };
 
 
