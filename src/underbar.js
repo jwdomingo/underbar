@@ -358,22 +358,17 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
-    var module = {
-      cache:  [],
-      inner: function() {
-        console.log('cache:', module.cache);
-        if (_.indexOf(module.cache, func) === -1) {
-          module.cache.push(func);
-          console.log('output A:', _.last(module.cache));
-          return _.last(module.cache);
-        }
-        console.log('output B:', _.last(module.cache));
-        return module.cache[_.indexOf(module.cache,func)];
+    var cache = {};
+
+    return function() {
+      var key = JSON.stringify(arguments);
+
+      if (cache[key]) {
+        return cache[key]
+      } else
+        return cache[key] = func.apply(this, arguments);
       }
     };
-
-    return module.inner.apply(this, arguments);
-  };
 
   // Delays a function for the given number of milliseconds, and then calls
   // it with the arguments supplied.
