@@ -393,8 +393,30 @@
   // TIP: This function's test suite will ask that you not modify the original
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
-  _.shuffle = function(array) {
-  };
+    _.shuffle = function(array) {
+      var shuffled = [],
+          shuffIdx = [],
+          arrLen = array.length,
+          rand, temp;
+
+      _.each(array, function(item, index) {
+        shuffIdx.push(index);
+      });
+
+      while(arrLen--) {
+        rand = Math.floor(Math.random() * (arrLen + 1));
+
+        temp = shuffIdx[arrLen];
+        shuffIdx[arrLen] = shuffIdx[rand];
+        shuffIdx[rand] = temp;
+      }
+
+      _.each(shuffIdx, function(item, index) {
+        shuffled.push(array[item]);
+      });
+
+      return shuffled;
+    };
 
     ////////////////////////////////
    //          ADVANCED          //
