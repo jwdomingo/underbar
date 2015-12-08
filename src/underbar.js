@@ -364,11 +364,13 @@
       var key = JSON.stringify(arguments);
 
       if (cache[key]) {
-        return cache[key]
-      } else
-        return cache[key] = func.apply(this, arguments);
+        return cache[key];
+      } else {
+        cache[key] = func.apply(this, arguments);
+        return cache[key];
       }
     };
+  }
 
   // Delays a function for the given number of milliseconds, and then calls
   // it with the arguments supplied.
