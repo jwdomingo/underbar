@@ -370,7 +370,7 @@
         return cache[key];
       }
     };
-  }
+  };
 
   // Delays a function for the given number of milliseconds, and then calls
   // it with the arguments supplied.
