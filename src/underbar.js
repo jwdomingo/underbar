@@ -363,12 +363,10 @@
     return function() {
       var key = JSON.stringify(arguments);
 
-      if (cache[key]) {
-        return cache[key];
-      } else {
+      if (!cache[key]) {
         cache[key] = func.apply(this, arguments);
-        return cache[key];
       }
+      return cache[key];
     };
   };
 
